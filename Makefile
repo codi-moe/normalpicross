@@ -90,19 +90,40 @@ out/appimage/normalpicross.AppImage: out/linux/normalpicross tools/appimagetool-
 out/normalpicross-linux-x86_64-appimage.tar.gz: out/appimage/normalpicross.AppImage
 	(cd out && tar czf normalpicross-linux-x86_64-appimage.tar.gz appimage)
 
+# build target: web
+.PHONY: web web-compat
+web: out/web/index.html
+web-compat: out/web-compat/index.html
+
+run-web: out/web-compat/index.html
+	npx serve out/web-compat
+
+out/web/index.html: out/normalpicross.love tools/love.js/node_modules/.bin/love.js
+	mkdir -p out
+	tools/love.js/node_modules/.bin/love.js -t "Normal Picross" out/normalpicross.love out/web
+out/web-compat/index.html: out/normalpicross.love tools/love.js/node_modules/.bin/love.js
+	mkdir -p out
+	tools/love.js/node_modules/.bin/love.js -c -t "Normal Picross" out/normalpicross.love out/web-compat
+
 # intermediate steps
 tools/love-11.5-win64.zip:
 	mkdir -p tools
 	curl -Lo tools/love-11.5-win64.zip 'https://github.com/love2d/love/releases/download/11.5/love-11.5-win64.zip'
 
 tools/love-11.5-x68_64.AppImage:
-	mkdir -p tools
+	mkdir -p tools && rm -f tools/love-11.5-x68_64.AppImage
 	curl -Lo tools/love-11.5-x68_64.AppImage- 'https://github.com/love2d/love/releases/download/11.5/love-11.5-x86_64.AppImage'
 	install -m 755 tools/love-11.5-x68_64.AppImage- tools/love-11.5-x68_64.AppImage
 	rm -f tools/love-11.5-x68_64.AppImage-
 
 tools/appimagetool-x68_6.AppImage:
-	mkdir -p tools
+	mkdir -p tools && rm -f tools/appimagetool-x68_6.AppImage
 	curl -Lo tools/appimagetool-x68_6.AppImage- https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
 	install -m 755 tools/appimagetool-x68_6.AppImage- tools/appimagetool-x68_6.AppImage
 	rm -f tools/appimagetool-x68_6.AppImage-
+
+tools/love.js/node_modules/.bin/love.js:
+	mkdir -p tools && rm -rf tools/love.js
+	git clone https://github.com/Davidobot/love.js.git tools/love.js
+	(cd tools/love.js && npm i)
+	ln -s ../../index.js tools/love.js/node_modules/.bin/love.js
