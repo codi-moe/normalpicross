@@ -1,5 +1,5 @@
 # input files
-LUA_FLES:= conf.lua main.lua $(wildcard normalpicross/*.lua)
+LUA_FLES:= $(shell find . -name '*.lua')
 ASSORTED_FILES:= README.md
 
 # main actions
