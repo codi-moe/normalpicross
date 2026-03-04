@@ -1,7 +1,7 @@
 function love.conf(t)
     t.identity = "normalpicross"
     t.version = "11.5"
-    t.window.title = "Normal Pricross"
+    t.window.title = "Normal Picross"
 
     t.console = false
     t.accelerometerjoystick = false
