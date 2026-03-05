@@ -226,7 +226,11 @@ end
 
 function picross:keypressed(key, scancode)
     if controls.ismenu(key, scancode) then
-        scenemanager.pop()
+        scenemanager.push('pausemenu', {
+            exit = function()
+                scenemanager.pop()
+            end
+        })
     elseif controls.isdown(key, scancode) then
         self:_move(0, 1)
     elseif controls.isup(key, scancode) then

@@ -3,6 +3,7 @@ local scenemanager = require "normalpicross.scenemanager"
 function love.load()
     scenemanager.declare(require "normalpicross.scene.demo")
     scenemanager.declare(require "normalpicross.scene.picross")
+    scenemanager.declare(require "normalpicross.scene.pausemenu")
     scenemanager.push('demo')
 end
 
