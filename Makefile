@@ -1,5 +1,5 @@
 # input files
-LUA_FLES:= $(shell find . -name '*.lua')
+LUA_FLES:= $(shell find *.lua normalpicross -name '*.lua')
 ASSORTED_FILES:= README.md
 
 # main actions
