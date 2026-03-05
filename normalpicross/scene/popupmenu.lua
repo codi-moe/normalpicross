@@ -17,7 +17,6 @@ end
 
 function popupmenu:draw()
     self.parent:draw()
-    
     love.graphics.origin()
     self:drawmenu()
 end

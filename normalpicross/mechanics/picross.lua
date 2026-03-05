@@ -10,7 +10,7 @@ function Picross:new(options)
     end
 
     local grid = {}
-    
+
     return setmetatable({
         w = options.w,
         h = options.h,

@@ -21,19 +21,20 @@ local function measuretext(text, x, y, halign, valign)
 
     if halign == 'right' then
         x = x - width
-    elseif haligh == 'center' then
-        x = x - width/2
+    elseif halign == 'center' then
+        x = x - width / 2
     end
     if valign == 'bottom' then
         y = y - height
     elseif valign == 'center' then
-        y = y - height/2
+        y = y - height / 2
     end
 
     return x, y, width, height
 end
 
 local function debugtext(text, y)
+    ---@diagnostic disable-next-line: redefined-local
     local x, y, w, h = measuretext(text, love.graphics.getWidth(), y, 'right')
     love.graphics.setColor(0, 0, 0, 1)
     love.graphics.rectangle('fill', x, y, w, h)

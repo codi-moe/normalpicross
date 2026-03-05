@@ -26,36 +26,36 @@ function picross:enter()
 end
 
 -- color of the numbers
-local clrnumbers = {1, 1, 1}
+local clrnumbers = { 1, 1, 1 }
 -- color of the lines
-local clrlines = {.9, .9, .9}
+local clrlines = { .9, .9, .9 }
 -- color of an active cell
-local clron = {.7, 1, .7}
+local clron = { .7, 1, .7 }
 -- color of an excluded cell
-local clrex = {1, .7, .7}
+local clrex = { 1, .7, .7 }
 -- color of an inactive cell
-local clroff = {.1, .1, .1}
+local clroff = { .1, .1, .1 }
 -- color of an active targetted cell
-local clront = {.2, 1, .7}
+local clront = { .2, 1, .7 }
 -- color of an excluded targetted cell
-local clrext = {1, .2, .2}
+local clrext = { 1, .2, .2 }
 -- color of an inactive targetted cell
-local clrofft = {.5, .5, .5}
+local clrofft = { .5, .5, .5 }
 
 function picross:draw()
     love.graphics.setColor(clroff)
     love.graphics.rectangle('fill', 100, 100, 10 * self.picross.w, 10 * self.picross.h)
 
     love.graphics.setColor(clrlines)
-    for x=0, self.picross.w do
+    for x = 0, self.picross.w do
         love.graphics.line(100 + x * 10, 0, 100 + x * 10, 100 + self.picross.h * 10)
     end
-    for y=0, self.picross.h do
+    for y = 0, self.picross.h do
         love.graphics.line(0, 100 + y * 10, 100 + self.picross.w * 10, 100 + y * 10)
     end
 
-    for x=1, self.picross.w do
-        for y=1, self.picross.h do
+    for x = 1, self.picross.w do
+        for y = 1, self.picross.h do
             local v = self.picross:get(x, y)
             if v == 'x' then
                 love.graphics.setColor(clron)
@@ -219,7 +219,7 @@ end
 function picross:mousereleased()
     self.hstate = nil
     self.hif = nil
-    self.hx, self.hy = nil
+    self.hx, self.hy = nil, nil
     self.hd = nil
 end
 
@@ -262,7 +262,7 @@ function picross:keyreleased(key, scancode)
     then
         self.hstate = nil
         self.hif = nil
-        self.hx, self.hy = nil
+        self.hx, self.hy = nil, nil
         self.hd = nil
     end
 end
