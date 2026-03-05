@@ -1,4 +1,5 @@
 local scenemanager = require "normalpicross.scenemanager"
+local controls = require "normalpicross.utils.controls"
 local Picross = require "normalpicross.mechanics.picross"
 
 local picross = scenemanager.Scene:new()
@@ -224,17 +225,17 @@ function picross:mousereleased()
 end
 
 function picross:keypressed(key, scancode)
-    if key == 'escape' or scancode == 'c' then
+    if controls.ismenu(key, scancode) then
         scenemanager.pop()
-    elseif key == 'down' or scancode == 's' then
+    elseif controls.isdown(key, scancode) then
         self:_move(0, 1)
-    elseif key == 'up' or scancode == 'w' then
+    elseif controls.isup(key, scancode) then
         self:_move(0, -1)
-    elseif key == 'left' or scancode == 'a' then
+    elseif controls.isleft(key, scancode) then
         self:_move(-1, 0)
-    elseif key == 'right' or scancode == 'd' then
+    elseif controls.isright(key, scancode) then
         self:_move(1, 0)
-    elseif (key == 'space' or key == 'return' or scancode == 'e' or scancode == 'z') and self.tx then
+    elseif controls.isprimary(key, scancode) and self.tx then
         local current = self.picross:get(self.tx, self.ty)
         local state = self:_setat(self.tx, self.ty, 'x')
         if state then
@@ -243,7 +244,7 @@ function picross:keypressed(key, scancode)
             self.hx, self.hy = self.tx, self.ty
             self.hd = nil
         end
-    elseif (key == 'backspace' or key == 'lshift' or key == 'rshift' or scancode == 'q' or scancode == 'x') and self.tx then
+    elseif controls.issecondary(key, scancode) and self.tx then
         local current = self.picross:get(self.tx, self.ty)
         local state = self:_setat(self.tx, self.ty, '.')
         if state then
@@ -256,10 +257,7 @@ function picross:keypressed(key, scancode)
 end
 
 function picross:keyreleased(key, scancode)
-    if
-        key == 'space' or key == 'return' or scancode == 'e' or scancode == 'z'
-        or key == 'backspace' or key == 'lshift' or key == 'rshift' or scancode == 'q' or scancode == 'x'
-    then
+    if controls.isprimary(key, scancode) or controls.issecondary(key, scancode) then
         self.hstate = nil
         self.hif = nil
         self.hx, self.hy = nil, nil

@@ -1,4 +1,5 @@
 local scenemanager = require "normalpicross.scenemanager"
+local controls = require "normalpicross.utils.controls"
 
 local popupmenu = scenemanager.Scene:new()
 popupmenu.name = 'popupmenu'
@@ -26,7 +27,7 @@ function popupmenu:drawmenu()
 end
 
 function popupmenu:keypressed(key, scancode)
-    if key == 'escape' or scancode == 'c' then
+    if controls.ismenu(key, scancode) then
         scenemanager.pop()
     end
 end
