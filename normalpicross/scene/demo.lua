@@ -22,12 +22,6 @@ function demo:draw()
     love.graphics.print("Ticks: " .. self.tick, 0, 30)
     love.graphics.print("DeltaTime: " .. self.deltatime, 0, 40)
 
-    do
-        local text = tostring(love.timer.getFPS())
-        local width = love.graphics.getFont():getWidth(text)
-        love.graphics.print(text, love.graphics.getWidth() - width, 0)
-    end
-
     for _, point in ipairs(self.points) do
         love.graphics.setColor(point.r, point.g, point.b, 1)
         love.graphics.circle("fill", point.x, point.y, 5)
@@ -35,6 +29,28 @@ function demo:draw()
 end
 
 function demo:mousepressed(x, y, button, touch)
+    if button == 2 then
+        scenemanager.push('picross', {
+            w = 5,
+            h = 5,
+            cols = {
+                {5},
+                {1, 1},
+                {1, 1},
+                {1, 1},
+                {5},
+            },
+            rows = {
+                {5},
+                {1, 1},
+                {1, 1},
+                {1, 1},
+                {5},
+            },
+        })
+        return
+    end
+
     local r, g, b = math.random(), math.random(), math.random()
     table.insert(self.points, {x=x, y=y, r=r, g=g, b=b})
 end
