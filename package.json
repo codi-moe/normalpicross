@@ -1,0 +1,20 @@
+{
+  "name": "normalpicross",
+  "version": "1.0.0",
+  "description": "Imagine a regular picross (or nonogram, if you call it that) that goes totally normally.   Except after some regular solves, you see a line indicator that totals to fifteen. And you were on a 10x board.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codi-moe/normalpicross.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codi-moe/normalpicross/issues"
+  },
+  "homepage": "https://github.com/codi-moe/normalpicross#readme",
+  "type": "module",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6"
+  }
+}
