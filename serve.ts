@@ -93,16 +93,20 @@ if (watchFlag) {
     ;(async () => {
       let originalVersion = null
       while (true) {
-        const res = await fetch("/_version")
-        const version = await res.text()
-        if (!originalVersion) {
-          originalVersion = version
-          continue
+        try {
+          const res = await fetch("/_version")
+          const version = await res.text()
+          if (!originalVersion) {
+            originalVersion = version
+            continue
+          }
+          if (version !== originalVersion) {
+            location.reload()
+          }
+          await new Promise(ok => setTimeout(ok, 100))
+        } catch (e) {
+          console.error(e)
         }
-        if (version !== originalVersion) {
-          location.reload()
-        }
-        await new Promise(ok => setTimeout(ok, 100))
       }
     })()
   `;
