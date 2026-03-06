@@ -34,25 +34,25 @@ function demo:mousepressed(x, y, button, touch)
             w = 5,
             h = 5,
             cols = {
-                {5},
-                {1, 1},
-                {1, 1},
-                {1, 1},
-                {5},
+                { 5 },
+                { 1, 1 },
+                { 1, 1 },
+                { 1, 1 },
+                { 5 },
             },
             rows = {
-                {5},
-                {1, 1},
-                {1, 1},
-                {1, 1},
-                {5},
+                { 5 },
+                { 1, 1 },
+                { 1, 1 },
+                { 1, 1 },
+                { 5 },
             },
         })
         return
     end
 
     local r, g, b = math.random(), math.random(), math.random()
-    table.insert(self.points, {x=x, y=y, r=r, g=g, b=b})
+    table.insert(self.points, { x = x, y = y, r = r, g = g, b = b })
 end
 
 return demo

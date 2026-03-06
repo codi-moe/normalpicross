@@ -81,7 +81,7 @@ scenemanager.Scene = {}
 scenemanager.Scene.__index = scenemanager.Scene
 
 function scenemanager.Scene:new(...)
-    local item = setmetatable({}, {__index = self})
+    local item = setmetatable({}, { __index = self })
     item:init(...)
     return item
 end
@@ -92,11 +92,11 @@ local methods = {
 
     -- scene switching
     'enter', -- (self, prev: Scene, action: string) -> void
-    'exit', -- (self, next: Scene, action: string) -> void
+    'exit',  -- (self, next: Scene, action: string) -> void
 
     -- lifecycle methods
     'update', -- (self, deltatime: number) -> void
-    'draw', -- (self) -> void
+    'draw',   -- (self) -> void
 }
 for _, fn in ipairs(methods) do
     scenemanager.Scene[fn] = function() end
@@ -104,12 +104,12 @@ end
 
 scenemanager.loveevents = {
     -- events
-    'mousemoved', -- (self, x: number, y: number, dx: number, dy: number, touch: boolean) -> void
-    'mousepressed', -- (self, x: number, y: number, button: number, touch:boolean, presses: number) -> void
+    'mousemoved',    -- (self, x: number, y: number, dx: number, dy: number, touch: boolean) -> void
+    'mousepressed',  -- (self, x: number, y: number, button: number, touch:boolean, presses: number) -> void
     'mousereleased', -- (self, x: number, y: number, button: number, touch:boolean, presses: number) -> void
 
     -- keyboard
-    'keypressed', -- (self, key: string, scancode: string, repeat: boolean) -> void
+    'keypressed',  -- (self, key: string, scancode: string, repeat: boolean) -> void
     'keyreleased', -- (self, key: string, scancode: string) -> void
 }
 for _, fn in ipairs(scenemanager.loveevents) do

@@ -8,7 +8,7 @@ function love.conf(t)
     t.externalstorage = false
     t.gammacorrect = true
     t.audio.mic = false
-    
+
     t.modules.joystick = false
     t.modules.physics = false
     t.modules.thread = false
