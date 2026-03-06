@@ -95,8 +95,11 @@ out/normalpicross-linux-x86_64-appimage.tar.gz: out/appimage/normalpicross.AppIm
 web: out/web/index.html
 web-compat: out/web-compat/index.html
 
+.PHONY: run-web live-web
 run-web: out/web/index.html
 	node serve.ts
+live-web:
+	node serve.ts --build --watch
 
 out/web/index.html: out/normalpicross.love tools/love.js/node_modules/.bin/love.js
 	mkdir -p out
