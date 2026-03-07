@@ -4,6 +4,7 @@ function love.load()
     scenemanager.declare(require "normalpicross.scene.demo")
     scenemanager.declare(require "normalpicross.scene.picross")
     scenemanager.declare(require "normalpicross.scene.pausemenu")
+    scenemanager.declare(require "normalpicross.scene.controlsmenu")
     scenemanager.push('demo')
 end
 

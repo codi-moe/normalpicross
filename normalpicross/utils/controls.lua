@@ -2,6 +2,8 @@ local Save = require "normalpicross.utils.save"
 
 local controls = {}
 
+controls.keys = { 'primary', 'secondary', 'menu', 'up', 'down', 'left', 'right' }
+
 local config = Save:new("controls.lua", {
     primary = {
         { key = 'space' },
@@ -51,11 +53,12 @@ function config:check()
     return true
 end
 
-local function update()
-    config:load()
-    config:save()
-
-    for k, v in pairs(config.data) do
+-- load the config from disk
+config:load()
+config:save()
+local function reload()
+    for _, k in ipairs(controls.keys) do
+        local v = config.data[k]
         controls[k] = { key = {}, scancode = {} }
         for _, obj in ipairs(v) do
             local t, r = next(obj)
@@ -64,7 +67,36 @@ local function update()
         end
     end
 end
-update()
+reload()
+
+local function update()
+    config.data = {}
+    for _, k in ipairs(controls.keys) do
+        config.data[k] = {}
+        for t, v in pairs(controls[k]) do
+            for r in pairs(v) do
+                table.insert(config.data[k], { [t] = r })
+            end
+        end
+    end
+    config:save()
+end
+
+function controls.add(type, mode, value)
+    controls[type][mode][value] = true
+    update()
+end
+
+function controls.del(type, mode, value)
+    controls[type][mode][value] = nil
+    update()
+end
+
+function controls.reset()
+    config.data = config.default
+    config:save()
+    reload()
+end
 
 function controls.is(type, key, scancode)
     return controls[type].key[key] or controls[type].scancode[scancode] or false

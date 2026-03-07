@@ -1,4 +1,5 @@
 local scenemanager = require "normalpicross.scenemanager"
+local controls = require "normalpicross.utils.controls"
 
 local demo = scenemanager.Scene:new()
 demo.name = 'demo'
@@ -25,6 +26,12 @@ function demo:draw()
     for _, point in ipairs(self.points) do
         love.graphics.setColor(point.r, point.g, point.b, 1)
         love.graphics.circle("fill", point.x, point.y, 5)
+    end
+end
+
+function demo:keypressed(key, scancode)
+    if controls.ismenu(key, scancode) then
+        scenemanager.push('controlsmenu')
     end
 end
 
