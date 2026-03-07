@@ -8,7 +8,7 @@ function love.load()
     scenemanager.push('demo')
 end
 
-love.update = function(deltatime)
+function love.update(deltatime)
     local scene = scenemanager.current()
     scene:update(deltatime)
 end
@@ -52,7 +52,7 @@ local function debuglines(lines)
     end
 end
 
-love.draw = function()
+function love.draw()
     local scene = scenemanager.current()
     scene:draw()
 

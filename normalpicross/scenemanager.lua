@@ -21,7 +21,7 @@ function scenemanager.new(kind, ...)
     return scenemanager.scenes[kind]:new(...)
 end
 
-function getscene(kind, ...)
+local function getscene(kind, ...)
     if type(kind) == 'table' then
         return kind
     end
